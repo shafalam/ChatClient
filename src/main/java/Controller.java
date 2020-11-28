@@ -1,4 +1,4 @@
-package com.shafiul.alam;
+package main.java;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,15 +26,16 @@ public class Controller {
     private TextField textMessage;
     @FXML
     private Button sendButton;
+
     @FXML
-    public void initialize(){
-        //label = new Label("Hey");
+    public void initialize() {
+        // label = new Label("Hey");
         allMessages = FXCollections.observableArrayList();
         messages.getItems().addAll(allMessages);
 
-        try{
+        try {
             socket = new Socket("localhost", 5000);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("IOException occurred: " + e.getMessage());
         }
 
@@ -42,7 +43,7 @@ public class Controller {
         aClient.start();
     }
 
-    public void add(String message){
+    public void add(String message) {
         int i = 0;
         allMessages.add("Love you no matter what " + i++);
         messages.getItems().add(message);
@@ -50,35 +51,36 @@ public class Controller {
     }
 
     @FXML
-    private void sendMessage(){
+    private void sendMessage() {
         new Client().send();
     }
-    class Client extends Thread{
+
+    class Client extends Thread {
         @Override
-        public void run(){
-            try{
+        public void run() {
+            try {
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String message;
-                while(true){
+                while (true) {
                     message = reader.readLine();
                     add(message);
                     System.out.println(message);
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("IOException occurred: " + e.getMessage());
             }
         }
 
-        public void send(){
-            try{
+        public void send() {
+            try {
                 PrintWriter writer = new PrintWriter(socket.getOutputStream());
                 String message = textMessage.getText();
                 writer.println(message);
                 writer.flush();
 
-            }catch (IOException e){
-                System.out.println("Exception occurred while sending data: " + e.getMessage() );
-            }finally {
+            } catch (IOException e) {
+                System.out.println("Exception occurred while sending data: " + e.getMessage());
+            } finally {
                 textMessage.setText("");
             }
         }
