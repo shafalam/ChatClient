@@ -29,14 +29,13 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        // label = new Label("Hey");
         allMessages = FXCollections.observableArrayList();
         messages.getItems().addAll(allMessages);
 
         try {
             socket = new Socket("localhost", 5000);
         } catch (IOException e) {
-            System.out.println("IOException occurred: " + e.getMessage());
+            System.out.println("Couldn't connect to the server. Detailed error: " + e.getMessage());
         }
 
         Client aClient = new Client();
@@ -45,7 +44,7 @@ public class Controller {
 
     public void add(String message) {
         int i = 0;
-        allMessages.add("Love you no matter what " + i++);
+        allMessages.add(" " + i++);
         messages.getItems().add(message);
         System.out.println("Pressed");
     }
