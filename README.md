@@ -1,7 +1,7 @@
 # ChatClient
 
 A chat client application. It is made with JavaFX. In order to work this application properly,
-[Chat-Application](https://github.com/shafalam/ChatServer) needs to run locally.
+[Chat-Server](https://github.com/shafalam/ChatServer) needs to run locally.
 
 Dependencies:
 
